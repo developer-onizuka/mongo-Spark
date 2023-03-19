@@ -1,13 +1,13 @@
 # mongo-Spark
 
 ```
-root@6f0287a605bd:/# cat <<EOF > test.csv
-> { "_id" : 1, "company" : "Tata", "quantity" : 10 }
-{ "_id" : 2, "company" : "Mercedeze", "quantity" : 15 }
-{ "_id" : 3, "company" : "Jeep", "quantity" : 20 }
-> EOF
+root@6f0287a605bd:/# cat <<EOF > test.json
+> { "_id" : 1, "company" : "Tata", "quantity" : 10 },
+> { "_id" : 2, "company" : "Mercedeze", "quantity" : 15 },
+> { "_id" : 3, "company" : "Jeep", "quantity" : 20 }
+EOF
 
-root@6f0287a605bd:/# mongoimport --host="localhost" --port=27017 --db="test_database" --collection="test_import" --type="json" --file="test.csv"
+root@6f0287a605bd:/# mongoimport --host="localhost" --port=27017 --db="test" --collection="cars" --type="json" --file="test.json"
 2023-03-19T09:36:50.473+0000	connected to: mongodb://localhost:27017/
 2023-03-19T09:36:50.489+0000	3 document(s) imported successfully. 0 document(s) failed to import.
 
