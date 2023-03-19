@@ -2,8 +2,8 @@
 
 ```
 root@6f0287a605bd:/# cat <<EOF > test.json
-{ "_id" : 1, "company" : "Tata", "quantity" : 10 },
-{ "_id" : 2, "company" : "Mercedeze", "quantity" : 15 },
+{ "_id" : 1, "company" : "Tata", "quantity" : 10 }
+{ "_id" : 2, "company" : "Mercedeze", "quantity" : 15 }
 { "_id" : 3, "company" : "Jeep", "quantity" : 20 }
 EOF
 
