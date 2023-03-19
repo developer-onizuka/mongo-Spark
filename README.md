@@ -5,7 +5,7 @@ root@6f0287a605bd:/# cat <<EOF > test.json
 > { "_id" : 1, "company" : "Tata", "quantity" : 10 },
 > { "_id" : 2, "company" : "Mercedeze", "quantity" : 15 },
 > { "_id" : 3, "company" : "Jeep", "quantity" : 20 }
-EOF
+> EOF
 
 root@6f0287a605bd:/# mongoimport --host="localhost" --port=27017 --db="test" --collection="cars" --type="json" --file="test.json"
 2023-03-19T09:36:50.473+0000	connected to: mongodb://localhost:27017/
