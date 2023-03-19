@@ -14,25 +14,21 @@ root@6f0287a605bd:/# mongoimport --host="localhost" --port=27017 --db="test" --c
 root@6f0287a605bd:/# mongosh
 
 test> show dbs
-admin          40.00 KiB
-config         12.00 KiB
-local          40.00 KiB
-test_database  40.00 KiB
+admin   40.00 KiB
+config  12.00 KiB
+local   40.00 KiB
+test     8.00 KiB
 
-test> use test_database
-switched to db test_database
+test> use test
+already on db test
 
-test_database> show collections
-test_import
+test> show collections
+cars
 
-test_database> db.test_import
-test_database.test_import
-
-test_database> db.test_import.find()
+test> db.cars.find()
 [
   { _id: 2, company: 'Mercedeze', quantity: 15 },
   { _id: 3, company: 'Jeep', quantity: 20 },
   { _id: 1, company: 'Tata', quantity: 10 }
 ]
-
 ```
