@@ -32,3 +32,13 @@ test> db.cars.find()
   { _id: 1, company: 'Tata', quantity: 10 }
 ]
 ```
+```
+test> db.cars.find({quantity : 15})
+[ { _id: 2, company: 'Mercedeze', quantity: 15 } ]
+
+test> db.cars.find({quantity :{$gte :15}})
+[
+  { _id: 2, company: 'Mercedeze', quantity: 15 },
+  { _id: 3, company: 'Jeep', quantity: 20 }
+]
+```
