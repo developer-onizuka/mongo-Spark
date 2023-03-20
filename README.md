@@ -42,3 +42,22 @@ test> db.cars.find({quantity :{$gte :15}})
   { _id: 3, company: 'Jeep', quantity: 20 }
 ]
 ```
+```
+git clone http://github.com/developer-onziuka/pandas
+cd pandas
+```
+```
+root@efe0e844a026:/pandas# mongoimport --host="localhost" --port=27017 --db="test" --collection="products" --type="csv" --file="products.csv" --headerline
+2023-03-20T07:30:24.991+0000	connected to: mongodb://localhost:27017/
+2023-03-20T07:30:25.009+0000	295 document(s) imported successfully. 0 document(s) failed to import.
+```
+```
+root@efe0e844a026:/pandas# mongosh
+
+test> use test
+already on db test
+
+test> db.products.count()
+DeprecationWarning: Collection.count() is deprecated. Use countDocuments or estimatedDocumentCount.
+295
+```
