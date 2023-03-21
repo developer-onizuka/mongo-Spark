@@ -45,7 +45,7 @@ df = spark.read.format("mongo") \
                .load()
 ```
 
-# 4. Transformation by Spark
+# 4. Transform by Spark
 ```
 from pyspark.sql.functions import desc
 
