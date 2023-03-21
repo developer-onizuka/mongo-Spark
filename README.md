@@ -33,7 +33,7 @@ spark = SparkSession \
         .config("spark.executor.memory", "1g") \
         .config("spark.mongodb.input.uri","mongodb://172.17.0.3:27017") \
         .config("spark.mongodb.output.uri","mongodb://172.17.0.3:27017") \
-        .config("spark.jars.packages", "org.mongodb.spark:mongo-spark-connector_2.12:3.0.0") \
+        .config("spark.jars.packages","org.mongodb.spark:mongo-spark-connector_2.12:3.0.0") \
         .getOrCreate()
 ```
 
@@ -41,7 +41,7 @@ spark = SparkSession \
 ```
 df = spark.read.format("mongo") \
                .option("database","test") \
-               .option("collection", "products") \
+               .option("collection","products") \
                .load()
 ```
 
@@ -58,7 +58,7 @@ productcountdf.show()
 ```
 productcountdf.write.format("mongo").mode("append") \
               .option("database","test2") \
-              .option("collection", "ModelNameCount") \
+              .option("collection","ModelNameCount") \
               .save()
 ```
 
