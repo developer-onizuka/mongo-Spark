@@ -22,7 +22,7 @@ DeprecationWarning: Collection.count() is deprecated. Use countDocuments or esti
 ```
 
 # 2. Create SparkSession with MongoDB connection string
-My MongoDB works on 172.17.0.3 as a container.
+Please nothe my MongoDB works on 172.17.0.3 as a container.
 ```
 from pyspark.sql import SparkSession
 
