@@ -87,7 +87,7 @@ plt.xticks(rotation=70)
 # Show the plot area
 plt.show()
 ```
-![mongo-Spark.png](https://github.com/developer-onizuka/mongo-Spark/mongo-Spark.png)
+![mongo-Spark.png](https://github.com/developer-onizuka/mongo-Spark/blob/main/mongo-Spark.png)
 
 # My Temporary Work
 ```
