@@ -132,3 +132,15 @@ test> db.cars.find({quantity :{$gte :15}})
   { _id: 3, company: 'Jeep', quantity: 20 }
 ]
 ```
+
+# Store DataFrame as parquet format
+```
+df.write.mode("append").parquet("newdf")
+```
+```
+(base) jovyan@d6fe5c01f3ed:~/mongo-Spark$ ls -l newdf/
+total 16
+-rw-r--r-- 1 jovyan users 13465 Mar 22 09:46 part-00000-a536a492-d71b-4c3e-acbe-eba382b7ebb6-c000.snappy.parquet
+-rw-r--r-- 1 jovyan users     0 Mar 22 09:46 _SUCCESS
+```
+
