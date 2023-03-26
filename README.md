@@ -63,6 +63,10 @@ productcountdf.write.format("mongo").mode("append") \
 ```
 
 # 6. BI Report
+I used Jupyther notebook but Power BI might be a good solution with advantages over a \notebook for data visualization:<br>
+- Power BI has advanced visualization capabilities
+- Power BI provides secure distribution and sharing options for distribution of insights across an organization
+
 ```
 dfPanda = productcountdf.toPandas()
 
