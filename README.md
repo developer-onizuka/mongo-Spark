@@ -18,8 +18,10 @@ root@efe0e844a026:/#
 
 # 3. Import csv file into mongodb instance
 ```
-$ git clone https://github.com/developer-onziuka/pandas
-$ cd pandas
+root@efe0e844a026:/# apt update
+root@efe0e844a026:/# apt install -y git
+root@efe0e844a026:/# git clone https://github.com/developer-onizuka/pandas
+root@efe0e844a026:/# cd pandas
 ```
 ```
 root@efe0e844a026:/pandas# mongoimport --host="localhost" --port=27017 --db="test" --collection="products" --type="csv" --file="products.csv" --headerline
