@@ -222,6 +222,7 @@ Spark automatically creates metastore (metastore_db) in the current directory, d
 > https://towardsdatascience.com/notes-about-saving-data-with-spark-3-0-86ba85ca2b71
 <br>
 The Hive metastore preservs an association between the parquet file and a database created with saveAsTable(), even if a spark session is restarted.
+
 ```
 %ls -l
 total 24
