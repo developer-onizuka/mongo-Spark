@@ -187,7 +187,6 @@ spark = SparkSession \
         .config("spark.mongodb.input.uri","mongodb://172.17.0.3:27017") \
         .config("spark.mongodb.output.uri","mongodb://172.17.0.3:27017") \
         .config("spark.jars.packages","org.mongodb.spark:mongo-spark-connector_2.12:3.0.0") \
-        .config("spark.sql.warehouse.dir", "work/") \
         .enableHiveSupport() \
         .getOrCreate()
 ```
@@ -204,7 +203,7 @@ print("# spark.sql.catalogImplementation = ", conf.get("spark.sql.catalogImpleme
 # spark.app.name =  myapp
 # spark.master =  local
 # spark.executor.memory =  1g
-# spark.sql.warehouse.dir =  file:/home/jovyan/work
+# spark.sql.warehouse.dir =  file:/home/jovyan/spark-warehouse
 # spark.sql.catalogImplementation =  hive
 ```
 ```
@@ -220,13 +219,13 @@ df.write.mode("overwrite").saveAsTable("products_new")
 ```
 ```
 %ls -l derby.log
--rw-r--r-- 1 jovyan users 672 May  7 04:49 derby.log
+-rw-r--r-- 1 jovyan users 672 May  7 05:10 derby.log
 ```
 ```
 %cat derby.log
 ----------------------------------------------------------------
-Sun May 07 04:49:01 UTC 2023:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0187-f48a-aab7-000001d06200 
+Sun May 07 05:10:06 UTC 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0187-f49d-f849-0000042485f8 
 on database directory /home/jovyan/metastore_db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5ffd2b27 
 Loaded from file:/usr/local/spark-3.2.1-bin-hadoop3.2/jars/derby-10.14.2.0.jar
 java.vendor=Ubuntu
@@ -237,4 +236,16 @@ os.arch=amd64
 os.version=5.4.0-139-generic
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
+```
+```
+spark.sql("SELECT * FROM products_new WHERE StandardCost > 2000").show()
++---------+--------+---------+---------+----------------+-------------+------------+-------------+--------------------+
+|ListPrice|MakeFlag|ModelName|ProductID|     ProductName|ProductNumber|StandardCost|SubCategoryID|                 _id|
++---------+--------+---------+---------+----------------+-------------+------------+-------------+--------------------+
+|  3578.27|       1| Road-150|      749|Road-150 Red, 62|   BK-R93R-62|   2171.2942|            2|{6456f3d06fcaf22f...|
+|  3578.27|       1| Road-150|      750|Road-150 Red, 44|   BK-R93R-44|   2171.2942|            2|{6456f3d06fcaf22f...|
+|  3578.27|       1| Road-150|      751|Road-150 Red, 48|   BK-R93R-48|   2171.2942|            2|{6456f3d06fcaf22f...|
+|  3578.27|       1| Road-150|      753|Road-150 Red, 56|   BK-R93R-56|   2171.2942|            2|{6456f3d06fcaf22f...|
+|  3578.27|       1| Road-150|      752|Road-150 Red, 52|   BK-R93R-52|   2171.2942|            2|{6456f3d06fcaf22f...|
++---------+--------+---------+---------+----------------+-------------+------------+-------------+--------------------+
 ```
