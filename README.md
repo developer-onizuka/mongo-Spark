@@ -173,3 +173,32 @@ newdf = spark.read.parquet('./newdf')
 newdf.show()
 ```
 
+# Spark SQL Read Hive Table
+How to read a Hive table into Spark DataFrame? Spark SQL supports reading a Hive table to DataFrame in two ways: the spark.read.table() method and the spark.sql() statement. spark.read is an object of DataFrameReader cleass.
+
+In order to read a Hive table, you need to create a SparkSession with enableHiveSupport(). This method is available at spark.sql.SparkSession.builder.enableHiveSupport() which is used to enable Hive support, including connectivity to a persistent Hive metastore, support for Hive SerDes, and Hive user-defined functions.
+
+```
+from pyspark.sql import SparkSession
+
+spark = SparkSession \
+        .builder \
+        .appName("myapp") \
+        .master("local") \
+        .config("spark.executor.memory", "1g") \
+        .config("spark.mongodb.input.uri","mongodb://172.17.0.3:27017") \
+        .config("spark.mongodb.output.uri","mongodb://172.17.0.3:27017") \
+        .config("spark.jars.packages","org.mongodb.spark:mongo-spark-connector_2.12:3.0.0") \
+        .config("hive.metastore.uris", "work/mymetastore.log") \
+        .config("spark.sql.warehouse.dir", "work") \
+        .enableHiveSupport() \
+        .getOrCreate()
+```
+```
+spark.sql("CREATE TABLE IF NOT EXISTS src (key INT, value STRING) USING hive")
+```
+```
+spark.sql("SELECT * FROM src").show()
+```
+```
+```
