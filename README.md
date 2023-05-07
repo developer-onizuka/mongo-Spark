@@ -34,8 +34,7 @@ root@efe0e844a026:/pandas# mongosh
 test> use test
 already on db test
 
-test> db.products.count()
-DeprecationWarning: Collection.count() is deprecated. Use countDocuments or estimatedDocumentCount.
+test> db.products.countDocuments()
 295
 ```
 
