@@ -191,6 +191,8 @@ spark = SparkSession \
         .enableHiveSupport() \
         .getOrCreate()
 ```
+
+If you create the spark session without enableHiveSupport(), then the output of spark.sql.catalogImplementation must be None. Spark SQL defaults to in-memory (non-Hive) catalog unless you use spark-shell that does the opposite (uses Hive metastore).
 ```
 conf = spark.sparkContext.getConf()
 print("# spark.app.name = ", conf.get("spark.app.name"))
@@ -211,6 +213,8 @@ df = spark.read.format("mongo") \
                .option("collection","products") \
                .load()
 ```
+
+DataFrames can also be saved as persistent tables into Hive metastore using the saveAsTable command which will materialize the contents of the DataFrame and create a pointer to the data in the Hive metastore. 
 ```
 df.write.mode("overwrite").saveAsTable("products_new")
 ```
