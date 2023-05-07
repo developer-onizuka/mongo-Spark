@@ -217,6 +217,8 @@ DataFrames can also be saved as persistent tables into Hive metastore using the 
 ```
 df.write.mode("overwrite").saveAsTable("products_new")
 ```
+
+Spark automatically creates metastore (metastore_db) in the current directory, deployed with default Apache Derby and also creates a directory configured by spark.sql.warehouse.dir to store the Spark tables, which defaults to the directory spark-warehouse in the current directory that the Spark application is started. 
 ```
 %ls -l
 total 24
