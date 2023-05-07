@@ -173,10 +173,8 @@ newdf = spark.read.parquet('./newdf')
 newdf.show()
 ```
 
-# Spark SQL Read Hive Table
-How to read a Hive table into Spark DataFrame? Spark SQL supports reading a Hive table to DataFrame in two ways: the spark.read.table() method and the spark.sql() statement. spark.read is an object of DataFrameReader cleass.
-
-In order to read a Hive table, you need to create a SparkSession with enableHiveSupport(). This method is available at spark.sql.SparkSession.builder.enableHiveSupport() which is used to enable Hive support, including connectivity to a persistent Hive metastore, support for Hive SerDes, and Hive user-defined functions.
+# Metastore in Apache Spark
+> https://medium.com/@sarfarazhussain211/metastore-in-apache-spark-9286097180a4
 
 ```
 from pyspark.sql import SparkSession
@@ -189,16 +187,43 @@ spark = SparkSession \
         .config("spark.mongodb.input.uri","mongodb://172.17.0.3:27017") \
         .config("spark.mongodb.output.uri","mongodb://172.17.0.3:27017") \
         .config("spark.jars.packages","org.mongodb.spark:mongo-spark-connector_2.12:3.0.0") \
-        .config("hive.metastore.uris", "work/mymetastore.log") \
-        .config("spark.sql.warehouse.dir", "work") \
+        .config("spark.sql.warehouse.dir", "work/") \
         .enableHiveSupport() \
         .getOrCreate()
 ```
 ```
-spark.sql("CREATE TABLE IF NOT EXISTS src (key INT, value STRING) USING hive")
+conf = spark.sparkContext.getConf()
+print("spark.app.name = ", conf.get("spark.app.name"))
+print("spark.master = ", conf.get("spark.master"))
+print("spark.executor.memory = ", conf.get("spark.executor.memory"))
+print("spark.sql.warehouse.dir = ", conf.get("spark.sql.warehouse.dir"))
 ```
 ```
-spark.sql("SELECT * FROM src").show()
+df = spark.read.format("mongo") \
+               .option("database","test") \
+               .option("collection","products") \
+               .load()
 ```
 ```
+df.write.mode("overwrite").saveAsTable("products_new")
+```
+```
+%ls -l derby.log
+-rw-r--r-- 1 jovyan users 672 May  7 04:49 derby.log
+```
+```
+%cat derby.log
+----------------------------------------------------------------
+Sun May 07 04:49:01 UTC 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0187-f48a-aab7-000001d06200 
+on database directory /home/jovyan/metastore_db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5ffd2b27 
+Loaded from file:/usr/local/spark-3.2.1-bin-hadoop3.2/jars/derby-10.14.2.0.jar
+java.vendor=Ubuntu
+java.runtime.version=11.0.13+8-Ubuntu-0ubuntu1.20.04
+user.dir=/home/jovyan
+os.name=Linux
+os.arch=amd64
+os.version=5.4.0-139-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
 ```
