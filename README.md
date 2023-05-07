@@ -193,10 +193,17 @@ spark = SparkSession \
 ```
 ```
 conf = spark.sparkContext.getConf()
-print("spark.app.name = ", conf.get("spark.app.name"))
-print("spark.master = ", conf.get("spark.master"))
-print("spark.executor.memory = ", conf.get("spark.executor.memory"))
-print("spark.sql.warehouse.dir = ", conf.get("spark.sql.warehouse.dir"))
+print("# spark.app.name = ", conf.get("spark.app.name"))
+print("# spark.master = ", conf.get("spark.master"))
+print("# spark.executor.memory = ", conf.get("spark.executor.memory"))
+print("# spark.sql.warehouse.dir = ", conf.get("spark.sql.warehouse.dir"))
+print("# spark.sql.catalogImplementation = ", conf.get("spark.sql.catalogImplementation"))
+
+# spark.app.name =  myapp
+# spark.master =  local
+# spark.executor.memory =  1g
+# spark.sql.warehouse.dir =  file:/home/jovyan/work
+# spark.sql.catalogImplementation =  hive
 ```
 ```
 df = spark.read.format("mongo") \
