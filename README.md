@@ -10,7 +10,7 @@ $ vagrant ssh
 
 # 1. Import csv file into mongodb instance
 ```
-$ git clone http://github.com/developer-onziuka/pandas
+$ git clone https://github.com/developer-onziuka/pandas
 $ cd pandas
 ```
 ```
