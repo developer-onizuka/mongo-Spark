@@ -1,9 +1,17 @@
 # mongo-Spark
 
+# 0. Create Virtual Machine
+```
+$ git clone https://github.com/developer-onizuka/scala
+$ cd scale
+$ vagrant up --provider=libvirt
+$ vagrant ssh
+```
+
 # 1. Import csv file into mongodb instance
 ```
-git clone http://github.com/developer-onziuka/pandas
-cd pandas
+$ git clone http://github.com/developer-onziuka/pandas
+$ cd pandas
 ```
 ```
 root@efe0e844a026:/pandas# mongoimport --host="localhost" --port=27017 --db="test" --collection="products" --type="csv" --file="products.csv" --headerline
