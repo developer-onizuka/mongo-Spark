@@ -218,8 +218,13 @@ DataFrames can also be saved as persistent tables into Hive metastore using the 
 df.write.mode("overwrite").saveAsTable("products_new")
 ```
 ```
-%ls -l derby.log
--rw-r--r-- 1 jovyan users 672 May  7 05:10 derby.log
+%ls -l
+total 24
+-rw-r--r-- 1 jovyan users  672 May  7 05:10 derby.log
+drwxr-sr-x 5 jovyan users 4096 May  7 05:10 metastore_db/
+drwxr-sr-x 3 jovyan users 4096 May  7 05:08 spark-warehouse/
+-rw-r--r-- 1 jovyan users 5891 May  7 05:22 Untitled.ipynb
+drwsrwsr-x 1 jovyan users 4096 May  7 05:10 work/
 ```
 ```
 %cat derby.log
