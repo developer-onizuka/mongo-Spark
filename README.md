@@ -218,16 +218,10 @@ DataFrames can also be saved as persistent tables into Hive metastore using the 
 df.write.mode("overwrite").saveAsTable("products_new")
 ```
 
-The default format is parquet so if you don’t specify it, it will be assumed.
+Spark automatically creates metastore (metastore_db) in the current directory, deployed with default Apache Derby and also creates a directory configured by spark.sql.warehouse.dir to store the Spark tables (essentially it's a collection of parquet files), which defaults to the directory spark-warehouse in the current directory. The default format is parquet so if you don’t specify it, it will be assumed. 
 > https://towardsdatascience.com/notes-about-saving-data-with-spark-3-0-86ba85ca2b71
-```
-%ls -l spark-warehouse/products_new
-total 16
--rw-r--r-- 1 jovyan users 13401 May  7 06:07 part-00000-ff9a9aac-0f2a-4b4d-a856-417c2cd411fd-c000.snappy.parquet
--rw-r--r-- 1 jovyan users     0 May  7 06:07 _SUCCESS
-```
-
-Spark automatically creates metastore (metastore_db) in the current directory, deployed with default Apache Derby and also creates a directory configured by spark.sql.warehouse.dir to store the Spark tables, which defaults to the directory spark-warehouse in the current directory that the Spark application is started. 
+<br>
+The Hive metastore preservs an association between the parquet file and a database created with saveAsTable(), even if a spark session is restarted.
 ```
 %ls -l
 total 24
@@ -236,6 +230,12 @@ drwxr-sr-x 5 jovyan users 4096 May  7 05:10 metastore_db/
 drwxr-sr-x 3 jovyan users 4096 May  7 05:08 spark-warehouse/
 -rw-r--r-- 1 jovyan users 5891 May  7 05:22 Untitled.ipynb
 drwsrwsr-x 1 jovyan users 4096 May  7 05:10 work/
+```
+```
+%ls -l spark-warehouse/products_new
+total 16
+-rw-r--r-- 1 jovyan users 13401 May  7 06:07 part-00000-ff9a9aac-0f2a-4b4d-a856-417c2cd411fd-c000.snappy.parquet
+-rw-r--r-- 1 jovyan users     0 May  7 06:07 _SUCCESS
 ```
 ```
 %cat derby.log
