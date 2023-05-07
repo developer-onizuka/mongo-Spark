@@ -1,6 +1,6 @@
 # mongo-Spark
 
-# 0. Create Virtual Machine
+# 1. Create Virtual Machine
 ```
 $ git clone https://github.com/developer-onizuka/scala
 $ cd scale
@@ -8,7 +8,15 @@ $ vagrant up --provider=libvirt
 $ vagrant ssh
 ```
 
-# 1. Import csv file into mongodb instance
+# 2. Run mongoDB as a Container
+```
+$ sudo docker pull mongo:6.0.5
+$ sudo docker run -d -p 27017:27017 --rm --name="mongodb" mongo:6.0.5
+$ sudo docker exec -it mongodb /bin/bash
+root@efe0e844a026:/#
+```
+
+# 3. Import csv file into mongodb instance
 ```
 $ git clone https://github.com/developer-onziuka/pandas
 $ cd pandas
@@ -29,8 +37,12 @@ DeprecationWarning: Collection.count() is deprecated. Use countDocuments or esti
 295
 ```
 
-# 2. Create SparkSession with MongoDB connection string
-Please nothe my MongoDB works on 172.17.0.3 as a container.
+# 4. Create SparkSession with MongoDB connection string
+Please nothe my MongoDB works on 172.17.0.3 as a container as following.
+```
+$ sudo docker exec -it mongodb hostname -i
+172.17.0.3
+```
 ```
 from pyspark.sql import SparkSession
 
@@ -45,7 +57,7 @@ spark = SparkSession \
         .getOrCreate()
 ```
 
-# 3. Extract from MongoDB
+# 5. Extract from MongoDB
 ```
 df = spark.read.format("mongo") \
                .option("database","test") \
@@ -53,7 +65,7 @@ df = spark.read.format("mongo") \
                .load()
 ```
 
-# 4. Transform by Spark
+# 6. Transform by Spark
 ```
 from pyspark.sql.functions import desc
 
@@ -62,7 +74,7 @@ productcountdf = tmpdf.filter(tmpdf['count']>1)
 productcountdf.show()
 ```
 
-# 5. Load data onto MongoDB (to different collection)
+# 7. Load data onto MongoDB (to different collection)
 ```
 productcountdf.write.format("mongo").mode("append") \
               .option("database","test2") \
@@ -70,7 +82,7 @@ productcountdf.write.format("mongo").mode("append") \
               .save()
 ```
 
-# 6. BI Report
+# 8. BI Report
 I used Jupyther notebook but Power BI might be a good solution with advantages over a \notebook for data visualization:<br>
 - Power BI has advanced visualization capabilities
 - Power BI provides secure distribution and sharing options for distribution of insights across an organization
