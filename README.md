@@ -39,10 +39,15 @@ test> db.products.countDocuments()
 ```
 
 # 4. Create SparkSession with MongoDB connection string
-Please nothe my MongoDB works on 172.17.0.3 as a container as following.
+```
+$ sudo docker run -it --rm -p 8888:8888 --name spark jupyter/all-spark-notebook:spark-3.2.0
+```
+Access the URL of http://127.0.0.1:8888/lab
+
+Please note my MongoDB works on 172.17.0.2 as a container as following.
 ```
 $ sudo docker exec -it mongodb hostname -i
-172.17.0.3
+172.17.0.2
 ```
 ```
 from pyspark.sql import SparkSession
@@ -52,8 +57,8 @@ spark = SparkSession \
         .appName("myapp") \
         .master("local") \
         .config("spark.executor.memory", "1g") \
-        .config("spark.mongodb.input.uri","mongodb://172.17.0.3:27017") \
-        .config("spark.mongodb.output.uri","mongodb://172.17.0.3:27017") \
+        .config("spark.mongodb.input.uri","mongodb://172.17.0.2:27017") \
+        .config("spark.mongodb.output.uri","mongodb://172.17.0.2:27017") \
         .config("spark.jars.packages","org.mongodb.spark:mongo-spark-connector_2.12:3.0.0") \
         .getOrCreate()
 ```
