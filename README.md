@@ -1,5 +1,47 @@
 # mongo-Spark
 
+# コンテナを活用した MongoDB × Spark のデータ処理・分析
+
+## **ゴール**
+MongoDB と Apache Spark を組み合わせてデータ処理を行い、BIレポートを生成することが目的です。  
+特に **コンテナ技術** を活用し、データの抽出・変換・ロード（ETL）を実施しながら分析を進めていきます。
+
+---
+
+## **ワークフロー概要**
+
+### **1. 仮想マシンの作成**
+Vagrant を使って仮想環境をセットアップし、開発環境を整える。
+
+### **2. MongoDB をコンテナで実行**
+Docker コンテナ上で MongoDB を起動し、データベースを運用する。
+
+### **3. CSVデータを MongoDB にインポート**
+`mongoimport` コマンドを使用して CSV ファイルを MongoDB に登録。
+
+### **4. SparkSession の作成**
+Spark の環境を構築し、MongoDB との接続を確立する。
+
+### **5. MongoDB からデータを抽出**
+Spark を使い MongoDB から `products` コレクションのデータを取得。
+
+### **6. データの変換処理（ETL）**
+Spark によるデータの **集計・フィルタリング** を行い、製品数が一定以上のデータを抽出。
+
+### **7. 変換後のデータを MongoDB に保存**
+処理結果を `test2` データベースの `ModelNameCount` コレクションへ保存。
+
+### **8. BI レポートの作成**
+Jupyter Notebook を用いてデータ可視化を行い、製品ごとのカウントをグラフで表示。  
+**Power BI** を利用すると、安全なデータ共有や高度な可視化が可能。
+
+### **9. 追加のデータ処理**
+- JSON データを MongoDB にインポートし、検索・フィルタ処理を実施。
+- DataFrame を **Parquet 形式** で保存し、後の分析に活用。
+
+---
+
+
 # 1. Create Virtual Machine
 ```
 $ git clone https://github.com/developer-onizuka/scala
