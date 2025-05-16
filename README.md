@@ -1,6 +1,6 @@
 # mongo-Spark
 
-# コンテナを活用した MongoDB × Spark のデータ処理・分析
+# コンテナを活用した MongoDB × Spark のデータ分析
 
 ## **ゴール**
 MongoDB と Apache Spark を組み合わせてデータ処理を行い、BIレポートを生成することが目的です。  
