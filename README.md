@@ -41,6 +41,9 @@ root@efe0e844a026:/pandas# mongosh
 test> use test
 already on db test
 
+test> db.products.find()
+...(省略)...
+
 test> db.products.countDocuments()
 295
 ```
